@@ -1,8 +1,21 @@
+* {
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+#opener {
+    display: flex;
+    justify-content: center;
+}
+
+h3 {
+    display: flex;
+    justify-content: flex-end;
+}
+
 button {
     color: blue;
     background-color: lightblue;
-    size: 200px;
-    padding: 50px;
+    size: 100px;
 }
 
 header {
