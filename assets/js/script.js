@@ -1,3 +1,4 @@
+// At initialization, clear the main greeting and the start button
 var startQuiz = function () {
     document.querySelector('#main-greeting').style.display = "none";
     document.getElementById('start-button').style.display = "none";
@@ -5,6 +6,7 @@ var startQuiz = function () {
 
 var questionNumber = 0;
 
+/*
 var questionAnswerArray = [
     {
         question: "What color is the sky?",
@@ -13,13 +15,14 @@ var questionAnswerArray = [
     },
     { 
         question:
-    }
+    
 ];
+
+
 
 var renderQuestion = () {
     var questionRender = document.createElement("h2").
-}
+};
+*/
 
 document.querySelector('#start-button').addEventListener("click", startQuiz);
-
-console.dir

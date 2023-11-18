@@ -4,3 +4,9 @@ button {
     size: 200px;
     padding: 50px;
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
