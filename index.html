@@ -22,16 +22,25 @@
     </section>
     <section class="question">
         <h1 id="question-block"></h1>
-        <div id="game-over">
-            <h1>All Done!</h1>
-            <h4 id="score"></h4>
-            <h4 id="initial-enter">Enter your initials:</h4>
-                <span>
-                    <input></input> 
-                    <button id="submit">Submit</button>
-                </span>
-        </div>
     </section>
+    <section id="game-over">
+        <h1>All Done!</h1>
+        <h4 id="score"></h4>
+        <h4 id="initial-enter">Enter your initials:</h4>
+        <span>
+            <input type="text" id="initial-input"></input> 
+            <button id="submit" class="final-buttons">Submit</button>
+        </span>
+    </section>
+    <section id="score-page">
+        <h1>High Scores</h1>
+        <div id="names"></div>
+        <span>
+            <button id="go-back-button" class="final-buttons">Go Back</button>
+            <button id="clear-scores" class="final-buttons">Clear High Scores</button>
+        </span>
+    </section>
+    <footer id="result"></footer>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

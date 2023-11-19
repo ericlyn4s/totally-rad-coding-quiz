@@ -2,6 +2,11 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
+section {
+    margin-left: 150px;
+    margin-right: 40px;
+}
+
 #opener {
     display: flex;
     justify-content: center;
@@ -33,16 +38,33 @@ div * {
 }
 
 #submit {
-    display: flex;
+    display: inline;
     align-items: flex-start;
-    height: 22px;
+    height: 30px;
     width: 75px;
-    text-justify: center;
     margin-top: 0;
+}
+
+.final-buttons {
+    display: inline;
+    align-items: flex-start;
+    height: 30px;
+    width: 200px;
+    text-justify: center;
+    margin-top: 20px;
 }
 
 input {
     height: 20px;
-    display: flex;
+    display: inline;
     align-items: flex-start;
 }
+
+footer {
+    color: grey;
+    margin-left: 150px;
+    border: grey;
+}
+
+
+
