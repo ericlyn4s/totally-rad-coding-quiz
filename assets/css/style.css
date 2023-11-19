@@ -13,9 +13,12 @@ h3 {
 }
 
 button {
-    color: blue;
-    background-color: lightblue;
-    size: 100px;
+    display: block;
+    color: black;
+    background-color: turquoise;
+    width: 400px;
+    height: 50px;
+    margin: 10px;
 }
 
 header {
