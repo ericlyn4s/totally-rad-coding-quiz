@@ -27,15 +27,15 @@ https://github.com/ericlyn4s/totally-rad-coding-quiz
 
 The starting layout provides instructions and a button to initiate the quiz. When the user hits 'Start Quiz', they're presented with the first question and four possible answers. After selecting an answer, the footer informs the user if they were correct or incorrect, and the next question/answer set is loaded to the screen. 
 
-<image src="assets/images/first-question.png" alt="A question reads 'Which of the following would change an element's background to red?', and four answers are provided below. A timer counts down in the top righthand corner, and a link reading 'View Highscores' is in the top lefthand corner." width="450" style="border: .5px solid;"/>
+<image src="assets/images/first-question.png" alt="A question reads 'Which of the following would change an element's background to red?', and four answers are provided below. A timer counts down in the top righthand corner, and a link reading 'View Highscores' is in the top lefthand corner." width="450"/>
 
 Additionally, a timer is displayed in the upper righthand corner and counts down from 120 seconds. If the user answers a question incorrectly, 10 seconds are deducted from the timer. The quiz ends when either (1) all questions have been answered or (2) the timer runs out. At game completion, the user is given their score and prompted to enter their initials. When the user hits 'submit', their initials and score are added to the high scores list. 
 
-<image src="assets/images/game-over.png" alt="Along with the 'View Highscores' and timer element in the header, the page shows 'All Done! Your final score is:' along with the user's score, then 'Enter your intials:' and a field for the user to input his or her intials." width = "450" style="border: .5px solid;" />
+<image src="assets/images/game-over.png" alt="Along with the 'View Highscores' and timer element in the header, the page shows 'All Done! Your final score is:' along with the user's score, then 'Enter your intials:' and a field for the user to input his or her intials." width = "450"/>
 
 This list is loaded next, which shows all user scores thus far. From this page, the user can hit the 'Go Back' button to restart the quiz, or the 'Clear High Scores' list to clear all entries from the high scores list. Finally, this high scores list can be accessed at any point from the upper lefthand corner should the user click the 'View Highscores' link.
 
-<image src="assets/images/high-scores.png" alt="Along with the 'View Highscores' and timer element in the header, the page shows a list of all user scores thus far. It shows the user's intials followed by their score, with two buttons at the bottom: 'Go Back' and 'Clear High Scores'." width="450" style="border: .5px solid;"/>
+<image src="assets/images/high-scores.png" alt="Along with the 'View Highscores' and timer element in the header, the page shows a list of all user scores thus far. It shows the user's intials followed by their score, with two buttons at the bottom: 'Go Back' and 'Clear High Scores'." width="450"/>
 
 ## Credits
 
