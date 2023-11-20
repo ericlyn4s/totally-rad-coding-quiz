@@ -15,7 +15,7 @@ var clearScores = document.querySelector('#clear-scores')
 var resultFooter = document.querySelector('#result');
 
 // Create global variables and set their defaults
-var timerCount = 60;
+var timerCount = 120;
 var questionNumber = 0;
 var score = 0;
 var highScores = [];
@@ -23,14 +23,116 @@ var highScores = [];
 // Array of questions for the quiz
 var questionAnswerArray = [
     {
-        question: "What color is the sky?",
-        choices: ["Orange", "Blue", "Yellow", "Black"],
-        answer: ["Blue"],
+        question: "Which of the following best describes a Web API?",
+        choices: ["Web APIs are low level code (say C or C++) that directly control the computer's GPU or other graphics functions.",
+        "Web APIs are not built into the browser by default, and you generally have to retrieve their code and information from somewhere on the Web.",
+        "Web APIs are built into your web browser and contain methods that allow us to manipulate a web page via JavaScript.",
+        "Web APIs are a part of the JavaScript language itself and are built into your browser."],
+        answer: ["Web APIs are built into your web browser and contain methods that allow us to manipulate a web page via JavaScript."],
     },
     {
-        question: "Who duh President is?",
-        choices: ["Tubby", "Kit", "Biden", "Trump"],
-        answer: ["Biden"],
+        question: "Which of the following would change an element's background to red?",
+        choices: ['element.setAttribute("style", "background-color: red");',
+        'element.setAttribute("red");',
+        'element.setAttribute("class", "background: red");',
+        'element.setAttribute("style", "red");'],
+        answer: ['element.setAttribute("style", "background-color: red");'],
+    },
+    {
+        question: "How would you append the following to the DOM? var myDiv = document.createElement('div');",
+        choices: ['myDiv.appendChild.document.body;',
+        'document.body.appendChild(myDiv);',
+        'document.body.appendChild("div");',
+        'document.body.appendChild = myDiv;'],
+        answer: ["document.body.appendChild(myDiv);"],
+    },
+    {
+        question: "What value would we add to setInterval() if we want a function called, myTimer() to run every 3 seconds?",
+        choices: ['setInterval(myTimer, 3)',
+        'setInterval(myTimer, 300)',
+        'setInterval(myTimer, 30)',
+        'setInterval(myTimer, 3000)'],
+        answer: ["setInterval(myTimer, 3000)"],
+    },
+    {
+        question: "Which attribute would we use to send an alert to the user when they click a specific element?",
+        choices: ["onchange='alert('You clicked me.')'",
+        "onclose='alert('You clicked me.')",
+        "ontoggle='alert('You clicked me.')",
+        "onclick='alert('You clicked me.')"],
+        answer: ["onclick='alert('You clicked me.')"],
+    },
+    {
+        question: "While creating a form for a client, you decide that you do not want the corresponding browser actions to happen, and you want to implement another behavior instead. What would you use to make this possible?",
+        choices: ['event.preventDefault()',
+        'event.dispatchEvent()',
+        'event.stopPropagation()',
+        'event.stopAction()'],
+        answer: ["event.preventDefault()"],
+    },
+    {
+        question: "You need to add an event listener to an element, pressEl, that checks to see if the element has been clicked and then runs myFunction(). Which of the following would you add to your code?",
+        choices: ['addEventListener(pressEL, "click", myFunction)',
+        'pressEl.addEventListener("click", myFunction)',
+        'pressEl.addEventListener("keydown", myFunction())',
+        'addEventListener(pressEL, "mouseover", myFunction())'],
+        answer: ['pressEl.addEventListener("click", myFunction)'],
+    },
+    {
+        question: "Your colleague notices that when she clicks on a <p> element on her page, handlers run on <p> and on <p>'s parent elements as well. She asks you to help her debug. Which of the following is most likely?",
+        choices: ['The parent node of <p> is triggering a bubbling event that is bubbling down towards <p> when it is clicked.',
+        'She forgot to add event.preventDefault() in her script.js file.',
+        'She added an event listener in the wrong place in her html file.',
+        "A bubbling event is occurring that starts with the target element, <p>, and is then running handlers on <p>'s parent and other ancestors."],
+        answer: ["A bubbling event is occurring that starts with the target element, <p>, and is then running handlers on <p>'s parent and other ancestors."],
+    },
+    {
+        question: "Which statement best describes what is happening to data when it is persisted to local storage.",
+        choices: ['The data is stored in the client or browser.',
+        'The data is stored in the database in the backend.',
+        'The data is stored under the Applications tab in Chrome Dev Tools.',
+        'The data is stored in the window called localStorage.'],
+        answer: ["The data is stored in the client or browser."],
+    },
+    {
+        question: "Why do we need to convert an object into JSON in order for it to properly persist to local storage?",
+        choices: ['Local storage cannot read JavaScript, so we convert JavaScript into JSON.',
+        'Local storage only accepts JSON objects.',
+        'It is convention to store objects using JSON, and we must follow that pattern so that our code is easy to read.',
+        'Local storage can only store strings, so we convert the object to JSON to store it properly.'],
+        answer: ["Local storage can only store strings, so we convert the object to JSON to store it properly."],
+    },
+    {
+        question: "You would like to set var classAttribute equal to an element's class attribute so that you can use the variable later in your code. Which of the following would accomplish this?",
+        choices: ['var classAttribute = element.removeAttribute("class);',
+        'var classAttribute = element.setAttribute("class");',
+        'var classAttribute = element.setAttribute("class", "classAttribute);',
+        'var classAttribute = element.getAttribute("class");'],
+        answer: ['var classAttribute = element.getAttribute("class");'],
+    },
+    {
+        question: 'You need to retrieve data with the key name of "formData" from local storage and convert it into an object. How would you accomplish this?',
+        choices: ['var formData = JSON.parse("formData");',
+        'var formData = JSON.parse(localStorage.getItem("formData"));',
+        'var formData = JSON.stringify(localStorage.getItem("formData"));',
+        'var formData = JSON.parse(localStorage.setItem("formData"));'],
+        answer: ['var formData = JSON.parse(localStorage.getItem("formData"));'],
+    },
+    {
+        question: "You just finished the feature that you've been working on a successfully merged your branch, feature-52. How would you delete branch, feature-52?",
+        choices: ["git branch feature-52",
+            "git branch -d feature-52",
+            "git merge feature-52",
+            "git checkout feature-52"],
+        answer: ["git branch -d feature-52"],
+    },
+    {
+        question: "Which of the following is NOT an example of why we use client-side storage?",
+        choices: ["It is best practice to use client-side storage to store sensitive information, like a user's payment information.",
+        "It allows us to store the contents of a user's shopping cart from a previous session.",
+        "We can use it to remember a user's preferences.",
+        'It can allow a user to use a site without a network connection.'],
+        answer: ["It is best practice to use client-side storage to store sensitive information, like a user's payment information."],
     },
 ];
 
@@ -41,19 +143,15 @@ clearScreen();
 function clearScreen() {
     gameOverScreen.style.display = "none";
     scoreScreen.style.display = "none";
-
     // Deletes any answer buttons that remain
     while (quizSection.firstChild) {
         quizSection.removeChild(quizSection.firstChild);
     };
-   
     // Deletes any entries that still exist in the high scores list
     while (initialsList.firstChild) {
         initialsList.removeChild(initialsList.firstChild);
     };
 };
-
-
 
 // At quiz start, clear the main greeting and the start button
 var startQuiz = function () {
@@ -87,6 +185,7 @@ function timerDeduction() {
 
 // Function to render the question and four answers; loops through the entire question/answer array
 function renderQuestion() {
+    gameOverScreen.style.display = "none";
     if (questionNumber < questionAnswerArray.length) {
         quizSection.textContent = questionAnswerArray[questionNumber].question;
     // Initialize four buttons and add a possible answer to each
@@ -157,7 +256,7 @@ function displayHighScores() {
   // Build the high scores list using a loop through the global high scores array
   for (i=0; i<highScores.length; i++) {
     const initialsScore = document.createElement('row');
-    initialsScore.textContent = highScores[i][0]+" - "+highScores[i][1]
+    initialsScore.textContent = highScores[i][0]+" - "+highScores[i][1];
     initialsList.appendChild(initialsScore);
   };
   // Functionality for the two buttons on this page
@@ -174,7 +273,7 @@ function reset() {
     startingPage.style.display = "block";
     // Reset the questions and timer to defaults
     questionNumber = 0;
-    timerCount = 60;
+    timerCount = 120;
     score = 0;
 }
 
