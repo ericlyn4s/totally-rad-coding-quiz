@@ -8,21 +8,26 @@
     
 </head>
 <body>
-    <header>
+    <!-- Create a header with a link to the highscores page and a timer -->
+    <header> 
         <div id="highscores">View Highscores</div>
         <div class= "card timer">
-            <span class="timer-text"></span>
-            <span class="timer-count"></span>
+            <span id="timer-text"></span>
+            <span id="timer-count"></span>
         </div>
     </header>
-    <section class="initial-body">
+    <!-- Create four sections for each of the layout types that get displayed -->
+    <section id="initial-body">
+    <!-- First section is the landing page, with the header and button to start the quiz -->
         <h1 id="main-greeting">Coding Quiz Challenge</h1>
         <h3>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</h3>
         <button id="start-button">Start Quiz</button>
     </section>
     <section class="question">
+    <!-- Second section is the question & answer layout, mostly generated in JavaScript -->
         <h1 id="question-block"></h1>
     </section>
+    <!-- Third section is the game over screen, where user can see their score and input initials -->
     <section id="game-over">
         <h1>All Done!</h1>
         <h4 id="score"></h4>
@@ -33,6 +38,7 @@
         </span>
     </section>
     <section id="score-page">
+    <!-- Fourth section is the list of high scores -->
         <h1>High Scores</h1>
         <div id="names"></div>
         <span>
@@ -40,6 +46,7 @@
             <button id="clear-scores" class="final-buttons">Clear High Scores</button>
         </span>
     </section>
+    <!-- A dynamic footer populates with 'correct' or 'incorrect' during the quiz -->
     <footer id="result"></footer>
     <script src="assets/js/script.js"></script>
 </body>

@@ -1,29 +1,6 @@
 * {
-    font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-
-section {
-    margin-left: 150px;
-    margin-right: 40px;
-}
-
-#opener {
-    display: flex;
-    justify-content: center;
-}
-
-h3 {
-    display: flex;
-    justify-content: flex-end;
-}
-
-button {
-    display: block;
-    color: black;
-    background-color: turquoise;
-    width: 400px;
-    height: 50px;
-    margin: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    cursor: default;
 }
 
 header {
@@ -32,11 +9,39 @@ header {
     padding: 8px;
 }
 
-div * {
-    display: flex;
-    justify-content: flex-start;
+/* Make 'view highscores' link pop more, enable hover effect */
+#highscores {
+    color: indigo;
 }
 
+#highscores:hover {
+    font-weight: bold;
+}
+
+/* Offset the body with a left margin */
+section, footer {
+    margin-left: 150px;
+    margin-right: 40px;
+}
+
+/* Set formatting for start button and answer buttons */
+button {
+    display: block;
+    color: black;
+    font-weight: bold;
+    background-color: turquoise;
+    width: 400px;
+    height: 50px;
+    margin: 10px;
+}
+
+/* Make the button dark when the cursor hovers over it */
+button:hover {
+    background-color: indigo;
+    color: white;
+}
+
+/* Make the submit button smaller than the other buttons */
 #submit {
     display: inline;
     align-items: flex-start;
@@ -45,6 +50,7 @@ div * {
     margin-top: 0;
 }
 
+/* Make final two buttons inline and smaller than the other buttons */
 .final-buttons {
     display: inline;
     align-items: flex-start;
@@ -54,17 +60,14 @@ div * {
     margin-top: 20px;
 }
 
+/* Ensure entry section has the correct cursor */
 input {
     height: 20px;
     display: inline;
     align-items: flex-start;
-}
+    cursor: auto;
+};
 
-footer {
-    color: grey;
-    margin-left: 150px;
-    border: grey;
-}
 
 
 
