@@ -15,10 +15,10 @@ var clearScores = document.querySelector('#clear-scores')
 var resultFooter = document.querySelector('#result');
 
 // Create global variables and set their defaults
-var timerCount = 120;
+var timerCount = 20;
 var questionNumber = 0;
 var score = 0;
-var highScores = [];
+var timer = null;
 
 // Array of questions for the quiz
 var questionAnswerArray = [
@@ -178,7 +178,6 @@ function timerDeduction() {
     if (timerCount > 10) {
         timerCount -= 10;
     } else {
-        clearInterval(timer);
         gameOver(); //if ten second reduction reduces time below 0 seconds, timer stops and game over occurs
     };
 };
@@ -221,9 +220,11 @@ function answerCheck(event) {
 
 // Game Over screen initializes and shows user score; prompts user to enter initials
 function gameOver() {
+  
+    gameOverScreen.style.display = "block";
     clearScreen();
     clearInterval(timer);
-    gameOverScreen.style.display = "block";
+
     scoreTotal.textContent = "Your final score is: "+score;
     submitButton.addEventListener("click",addHighScore); //Once user submits initials and hits submit button, start the addHighScore function
 };
@@ -231,12 +232,14 @@ function gameOver() {
 // addHighScore ensure the user has typed in two characters, creates a new array for this, then pushes that array to the global highscore array
 function addHighScore() {
     // Reset local array to be empty
-    var newScore = [];
+    var highScores = JSON.parse(localStorage.getItem("highScores"))||[];
+    var newScore = {};
     // Check that input is 2 characters exactly
     if(userInitials.value.length == 2) {
-        newScore.push(userInitials.value.trim());
-        newScore.push(score);
+        newScore.initials = userInitials.value;
+        newScore.score = score;
         highScores.push(newScore);
+        localStorage.setItem("highScores",JSON.stringify(highScores));
     };
     // Initials and score are added to the high scores list, run the function to display the list
     displayHighScores();
@@ -253,12 +256,17 @@ function displayHighScores() {
   // Activate the score screen that was pulled from HTML
   scoreScreen.style.display = "block";
   initialsList.style.display = "block";
+  var highScores = JSON.parse(localStorage.getItem("highScores"))||[];
+  if (highScores.length == 0) {
+    return;
+    };
   // Build the high scores list using a loop through the global high scores array
   for (i=0; i<highScores.length; i++) {
     const initialsScore = document.createElement('row');
-    initialsScore.textContent = highScores[i][0]+" - "+highScores[i][1];
+    initialsScore.textContent = highScores[i].initials+" - "+highScores[i].score;
     initialsList.appendChild(initialsScore);
   };
+
   // Functionality for the two buttons on this page
   goBack.addEventListener("click",reset);
   clearScores.addEventListener("click",eraseScores);
@@ -273,13 +281,13 @@ function reset() {
     startingPage.style.display = "block";
     // Reset the questions and timer to defaults
     questionNumber = 0;
-    timerCount = 120;
+    timerCount = 20;
     score = 0;
 }
 
 // Erases the global scores array
 function eraseScores() {
-    highScores = [];
+    localStorage.removeItem("highScores");
     displayHighScores();
 }
 
