@@ -50,6 +50,12 @@ button:hover {
     margin-top: 0;
 }
 
+row {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /* Make final two buttons inline and smaller than the other buttons */
 .final-buttons {
     display: inline;
