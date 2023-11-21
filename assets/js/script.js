@@ -18,7 +18,6 @@ var resultFooter = document.querySelector('#result');
 var timerCount = 20;
 var questionNumber = 0;
 var score = 0;
-var timer = null;
 
 // Array of questions for the quiz
 var questionAnswerArray = [
@@ -178,6 +177,7 @@ function timerDeduction() {
     if (timerCount > 10) {
         timerCount -= 10;
     } else {
+        clearInterval(timer);
         gameOver(); //if ten second reduction reduces time below 0 seconds, timer stops and game over occurs
     };
 };
@@ -221,10 +221,9 @@ function answerCheck(event) {
 // Game Over screen initializes and shows user score; prompts user to enter initials
 function gameOver() {
   
-    gameOverScreen.style.display = "block";
     clearScreen();
     clearInterval(timer);
-
+    gameOverScreen.style.display = "block";
     scoreTotal.textContent = "Your final score is: "+score;
     submitButton.addEventListener("click",addHighScore); //Once user submits initials and hits submit button, start the addHighScore function
 };
@@ -274,6 +273,7 @@ function displayHighScores() {
 
 // Reset the quiz 
 function reset() {
+    console.log('yes');
     clearScreen();
     // Display all header elements
     timerElement.style.display = "block";
@@ -283,13 +283,13 @@ function reset() {
     questionNumber = 0;
     timerCount = 20;
     score = 0;
-}
+};
 
 // Erases the global scores array
 function eraseScores() {
     localStorage.removeItem("highScores");
     displayHighScores();
-}
+};
 
 // If user hits 'View Highscores' button, go to high scores list
 viewHighscores.addEventListener("click",displayHighScores);
