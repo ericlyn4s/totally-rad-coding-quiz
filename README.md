@@ -4,7 +4,7 @@
 
 I created this site to practice my web API knowledge. After learning about the DOM, events, and client-side storage, I decided to put my learnings to practical use. Creating a quiz is helpful in that respect, but it'll also help me stay sharp on these concepts in the coming weeks. I purposefully made the questions relevant to the topics mentioned above. I plan to revisit this quiz when I'm preparing for interviews or just need to freshen up on web APIs.
 
-I found this project to be the most difficult one yet. Concepts like appending divs to the DOM or the bubbling effect didn't click initially. This project contains the most code I've written thus far, and the time and effort behind this project helped me grasp these important lessons.
+I found this project to be the most difficult one yet. Concepts like appending divs to the DOM or the bubbling effect didn't click initially. This project contains the most code I've written thus far, and the time and effort behind this project helped me grasp these important lessons. I even had to rewrite the entire JS and HTML in order to fix a bug, and this additional time was an excellent learning opportuntiy on creating more efficient code.
 
 ## Table of Contents (Optional)
 
@@ -29,7 +29,7 @@ The starting layout provides instructions and a button to initiate the quiz. Whe
 
 <image src="assets/images/first-question.png" alt="A question reads 'Which of the following would change an element's background to red?', and four answers are provided below. A timer counts down in the top righthand corner, and a link reading 'View Highscores' is in the top lefthand corner." width="450"/>
 
-Additionally, a timer is displayed in the upper righthand corner and counts down from 120 seconds. If the user answers a question incorrectly, 10 seconds are deducted from the timer. The quiz ends when either (1) all questions have been answered or (2) the timer runs out. At game completion, the user is given their score and prompted to enter their initials. When the user hits 'submit', their initials and score are added to the high scores list. 
+Additionally, a timer is displayed in the upper righthand corner and counts down from 120 seconds. If the user answers a question incorrectly, 10 seconds are deducted from the timer. The quiz ends when either (1) all questions have been answered or (2) the timer runs out. At game completion, the user is given their score and prompted to enter their initials. When the user hits 'submit', their initials and score are added to the high scores list. If two characters are not input at this stage, the user will get an error message.
 
 <image src="assets/images/game-over.png" alt="Along with the 'View Highscores' and timer element in the header, the page shows 'All Done! Your final score is:' along with the user's score, then 'Enter your intials:' and a field for the user to input his or her intials." width = "450"/>
 
