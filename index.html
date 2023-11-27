@@ -4,50 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Coding Quiz Challenge</title>
-    
+    <title>Totally Rad Coding Quiz</title>
 </head>
 <body>
     <!-- Create a header with a link to the highscores page and a timer -->
-    <header> 
-        <div id="highscores">View Highscores</div>
-        <div class= "card timer">
-            <span id="timer-text"></span>
-            <span id="timer-count"></span>
-        </div>
-    </header>
+    <header>
+        <div id="highscores-link">View Highscores</div>
+        <div id="timer-text"></div>
+    </header> 
     <!-- Create four sections for each of the layout types that get displayed -->
-    <section id="initial-body">
-    <!-- First section is the landing page, with the header and button to start the quiz -->
-        <h1 id="main-greeting">Coding Quiz Challenge</h1>
-        <h3>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</h3>
-        <button id="start-button">Start Quiz</button>
+    <section id="initial-page"> 
+    <!-- First section is the landing page, with the greeting message and button to start the quiz -->
     </section>
-    <section class="question">
+    <section id="question-page">
     <!-- Second section is the question & answer layout, mostly generated in JavaScript -->
-        <h1 id="question-block"></h1>
     </section>
+    <section id="game-over-page">
     <!-- Third section is the game over screen, where user can see their score and input initials -->
-    <section id="game-over">
-        <h1>All Done!</h1>
-        <h4 id="score"></h4>
-        <h4 id="initial-enter">Enter your initials:</h4>
-        <span>
-            <input type="text" id="initial-input"></input> 
-            <button id="submit" class="final-buttons">Submit</button>
-        </span>
     </section>
     <section id="score-page">
     <!-- Fourth section is the list of high scores -->
-        <h1>High Scores</h1>
-        <div id="names"></div>
-        <span>
-            <button id="go-back-button" class="final-buttons">Go Back</button>
-            <button id="clear-scores" class="final-buttons">Clear High Scores</button>
-        </span>
     </section>
-    <!-- A dynamic footer populates with 'correct' or 'incorrect' during the quiz -->
-    <footer id="result"></footer>
+    <!-- A dynamic footer populates with 'correct' or 'incorrect' during the quiz, as well as an error message should the user input their initials incorrectly -->
+    <footer id="question-result"></footer>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
