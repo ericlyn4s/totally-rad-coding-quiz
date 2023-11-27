@@ -1,23 +1,16 @@
 // Create variables from main HTML elements using their IDs
-var viewHighscores = document.querySelector('#highscores');
-var timerElement = document.querySelector('#timer-count');
-var startingPage = document.querySelector('#initial-body')
-var startButton = document.querySelector('#start-button');
-var quizSection = document.querySelector('#question-block');
-var gameOverScreen = document.querySelector('#game-over');
-var userInitials = document.querySelector('#initial-input');
-var initialsList = document.querySelector('#names');
-var scoreScreen = document.querySelector('#score-page');
-var submitButton = document.querySelector("#submit");
-var scoreTotal = document.querySelector('#score')
-var goBack = document.querySelector('#go-back-button');
-var clearScores = document.querySelector('#clear-scores')
-var resultFooter = document.querySelector('#result');
+var highScoresLink = document.querySelector('#highscores-link');
+var initialPage = document.querySelector('#initial-page');
+var timerElement =  document.querySelector('#timer-text');
+var quizSection = document.querySelector('#question-page');
+var questionResult = document.querySelector('#question-result');
+var gameOverPage = document.querySelector('#game-over-page');
+var scorePage = document.querySelector('#score-page');
 
 // Create global variables and set their defaults
-var timerCount = 20;
-var questionNumber = 0;
-var score = 0;
+timerCount = 120;
+questionNumber = 0;
+score = 0;
 
 // Array of questions for the quiz
 var questionAnswerArray = [
@@ -135,164 +128,202 @@ var questionAnswerArray = [
     },
 ];
 
-// Ensure only the landing page loads at page initiation
-clearScreen();
-
-// A recurring function that clears the screen between quiz components
+// A recurring function that clears the screen by removing all child elements
 function clearScreen() {
-    gameOverScreen.style.display = "none";
-    scoreScreen.style.display = "none";
-    // Deletes any answer buttons that remain
+    while (initialPage.firstChild) {
+        initialPage.removeChild(initialPage.firstChild);
+    };
+
     while (quizSection.firstChild) {
         quizSection.removeChild(quizSection.firstChild);
     };
-    // Deletes any entries that still exist in the high scores list
-    while (initialsList.firstChild) {
-        initialsList.removeChild(initialsList.firstChild);
-    };
-};
 
-// At quiz start, clear the main greeting and the start button
-var startQuiz = function () {
-    startingPage.style.display = "none";
+    while (gameOverPage.firstChild) {
+        gameOverPage.removeChild(gameOverPage.firstChild);
+    };
+
+    while (scorePage.firstChild) {
+        scorePage.removeChild(scorePage.firstChild);
+    }
+}
+
+// Add link to 'view highscores' header element
+highScoresLink.addEventListener("click",displayHighScores);
+
+// Load the landing page first via the inializeScreen function
+initializeScreen();
+function initializeScreen() {
+    var greeting = document.createElement("h1");
+    var subGreeting = document.createElement("h3");
+    var buttonGreeting = document.createElement("button");
+
+    greeting.textContent = "Coding Quiz Challenge";
+    subGreeting.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+    buttonGreeting.textContent = "Start Quiz";
+
+    initialPage.appendChild(greeting);
+    initialPage.appendChild(subGreeting);
+    initialPage.appendChild(buttonGreeting);
+
+    buttonGreeting.addEventListener("click", startQuiz);
+}
+
+// At quiz start, load the question/answer section and start timer
+function startQuiz() {
+    clearScreen();
     startTimer();
     renderQuestion();
-};
+}
 
-// Setting the timer to decrease each second
+// Setting the timer to decrease every second
 function startTimer() {
-    timerElement.textContent = "Time: "+timerCount;
-    timer = setInterval(function() { 
-        timerCount --;
-        timerElement.textContent = "Time: "+timerCount; 
-        if (timerCount === 0) {
+
+    timer = setInterval(function() {
+        if (timerCount > 0) {
+            timerCount --;
+            timerElement.textContent = "Time: "+timerCount;
+        } else {
             clearInterval(timer);
-            gameOver(); //if time has run out, go to gameOver function
+            gameOver(); // if time has run out, go to gameOver function
         };
     }, 1000);
-};
+}
 
 // Setting the timer penalty to reduce by 10 seconds if a wrong answer is selected
-function timerDeduction() {
+function timePenalty() {
     if (timerCount > 10) {
         timerCount -= 10;
     } else {
-        clearInterval(timer);
-        gameOver(); //if ten second reduction reduces time below 0 seconds, timer stops and game over occurs
+        questionNumber = questionAnswerArray.length;
+        timerElement.textContent = "Time: 0"; // Reset timer if wrong answer is selected when timer is less than 10 seconds
     };
 };
 
 // Function to render the question and four answers; loops through the entire question/answer array
 function renderQuestion() {
-    gameOverScreen.style.display = "none";
     if (questionNumber < questionAnswerArray.length) {
-        quizSection.textContent = questionAnswerArray[questionNumber].question;
-    // Initialize four buttons and add a possible answer to each
+        clearScreen();
+        // Create new 'h1' element and display next question
+        var quizSectionQuestion = document.createElement("h1");
+        quizSectionQuestion.textContent = questionAnswerArray[questionNumber].question;
+        quizSection.appendChild(quizSectionQuestion);
+        // Create four buttons and add an answer to each
         for (i=0; i<4; i++) {
-            const newButton = document.createElement('button');
-            newButton.textContent = questionAnswerArray[questionNumber].choices[i];
-            quizSection.appendChild(newButton);
-            }
-        questionNumber++; // Increase question counter so next question gets pulled from question/answer array
-        quizSection.addEventListener("click", answerCheck); // If user clicks the mouse when a question is displayed, run the answerCheck function
+            const answerButton = document.createElement('button');
+            answerButton.textContent = questionAnswerArray[questionNumber].choices[i];
+            quizSection.appendChild(answerButton);
+        }
+        // Increase question number and check user answer
+        questionNumber++;
+        quizSection.addEventListener('click', answerCheck);
     } else {
-        gameOver(); // Go to game over screen if all questions have been asked
+        gameOver(); // Go to game over screen if all questions have been asked/answered
     };
 };
 
 // Function checks that user selected an answer and whether or not this was correct
 function answerCheck(event) {
-        var element = event.target;  
-        // Checks if element is a button
-        if (element.matches("button") === true) {
-            // adds the button's text to the selectedAnswer variable
-            selectedAnswer = element.textContent;
-            if (selectedAnswer == questionAnswerArray[questionNumber-1].answer) {
-                resultFooter.innerHTML = "Correct!"
-                score ++;
-            } else {
-                resultFooter.innerHTML = "Incorrect!"
-                timerDeduction();
-            }
-        };
+    var element = event.target;
+    // Checks if element is a button
+    if (element.matches('button') === true) {
+        // adds the button's text to the selectedAnswer variable
+        selectedAnswer = element.textContent;
+        if (selectedAnswer == questionAnswerArray[questionNumber -1].answer) {
+            questionResult.innerHTML = "Correct!";
+            score ++;
+        } else {
+            questionResult.innerHTML = "Incorrect!"
+            timePenalty();
+        }
+    };
     renderQuestion();
 };
 
 // Game Over screen initializes and shows user score; prompts user to enter initials
 function gameOver() {
-  
     clearScreen();
     clearInterval(timer);
-    gameOverScreen.style.display = "block";
-    scoreTotal.textContent = "Your final score is: "+score;
-    submitButton.addEventListener("click",addHighScore); //Once user submits initials and hits submit button, start the addHighScore function
-};
+    
+    // Create a message, an input section, and a button and append it to the game over section of the HTML
+    var gameOverText = document.createElement('h1');
+    var gameOverInput = document.createElement('input');
+    var gameOverButton = document.createElement('button');
 
-// addHighScore ensure the user has typed in two characters, creates a new array for this, then pushes that array to the global highscore array
-function addHighScore() {
-    // Reset local array to be empty
-    var highScores = JSON.parse(localStorage.getItem("highScores"))||[];
-    var newScore = {};
-    // Check that input is 2 characters exactly
-    if(userInitials.value.length == 2) {
-        newScore.initials = userInitials.value;
-        newScore.score = score;
-        highScores.push(newScore);
-        localStorage.setItem("highScores",JSON.stringify(highScores));
-    };
-    // Initials and score are added to the high scores list, run the function to display the list
-    displayHighScores();
-};
+    gameOverText.textContent = "Your final score is: "+score;
+    gameOverButton.textContent = "Submit";
 
-// High scores are displayed on a new screen
+    gameOverPage.appendChild(gameOverText);
+    gameOverPage.appendChild(gameOverInput);
+    gameOverPage.appendChild(gameOverButton);
+
+    // If user hits the 'submit' button, check that they entered two characters, then add this to local storage
+    gameOverButton.addEventListener('click',function() {
+        var highScores = JSON.parse(localStorage.getItem("highScores"))||[];
+        var newScore = {};
+    
+        if(gameOverInput.value.length == 2) {
+            newScore.initials = gameOverInput.value;
+            newScore.score = score;
+            highScores.push(newScore);
+            localStorage.setItem("highScores",JSON.stringify(highScores));
+        } else {
+            questionResult.innerHTML = "Initials must be two characters in length";
+            return;
+        };
+        // Initials and score are added to the high scores list, run the function to display the list
+        displayHighScores();
+    });
+}
+
+// Function to display all high scores in local storage
 function displayHighScores() {
-  // Hide header and footer elements and clear the scree
-  startingPage.style.display = "none";
-  timerElement.style.display = "none";
-  viewHighscores.style.display = "none";
-  resultFooter.innerHTML = "";
-  clearScreen();
-  // Activate the score screen that was pulled from HTML
-  scoreScreen.style.display = "block";
-  initialsList.style.display = "block";
-  var highScores = JSON.parse(localStorage.getItem("highScores"))||[];
-  if (highScores.length == 0) {
-    return;
-    };
-  // Build the high scores list using a loop through the global high scores array
-  for (i=0; i<highScores.length; i++) {
+    clearScreen();
+    questionResult.innerHTML = "";
+    timerElement.textContent = "";
+
+    // create a message and two buttons and define their contents
+    var highScoresMessage = document.createElement('h1');
+    var highScoresBackButton = document.createElement('button');
+    var highScoresClearButton = document.createElement('button');
+    highScoresMessage.textContent = "High Scores";
+    highScoresBackButton.textContent = "Go Back";
+    highScoresClearButton.textContent = "Clear Scores";
+
+    // Put the message at the top of this section
+    scorePage.appendChild(highScoresMessage);
+    
+
+    // Redefine the highScores array by pulling data from the "highScores" array in local storage
+    var highScores = JSON.parse(localStorage.getItem("highScores"))||[];
+   
+    // Build the high scores list using a loop through this array
+    for (i=0; i<highScores.length; i++) {
     const initialsScore = document.createElement('row');
     initialsScore.textContent = highScores[i].initials+" - "+highScores[i].score;
-    initialsList.appendChild(initialsScore);
-  };
+    scorePage.appendChild(initialsScore);
+    };
 
-  // Functionality for the two buttons on this page
-  goBack.addEventListener("click",reset);
-  clearScores.addEventListener("click",eraseScores);
-};
+    // Functionality for the two buttons on this page
+    highScoresBackButton.addEventListener("click",reset);
+    highScoresClearButton.addEventListener("click",eraseScores);
+
+    // Append the 'back' and 'clear' buttons to the bottom of the list
+    scorePage.appendChild(highScoresBackButton);
+    scorePage.appendChild(highScoresClearButton);
+}
 
 // Reset the quiz 
 function reset() {
-    console.log('yes');
     clearScreen();
-    // Display all header elements
-    timerElement.style.display = "block";
-    viewHighscores.style.display = "block";
-    startingPage.style.display = "block";
     // Reset the questions and timer to defaults
-    questionNumber = 0;
-    timerCount = 20;
+    questionNumber = 0; 
+    timerCount = 120;
     score = 0;
-};
+    initializeScreen();
+}
 
 // Erases the global scores array
 function eraseScores() {
     localStorage.removeItem("highScores");
     displayHighScores();
-};
-
-// If user hits 'View Highscores' button, go to high scores list
-viewHighscores.addEventListener("click",displayHighScores);
-
-// If user hits 'Start Quiz' button, start startQuiz function
-startButton.addEventListener("click", startQuiz);
+}

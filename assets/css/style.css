@@ -1,3 +1,4 @@
+/* Set consistent font and cursor types */
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     cursor: default;
@@ -10,11 +11,11 @@ header {
 }
 
 /* Make 'view highscores' link pop more, enable hover effect */
-#highscores {
+#highscores-link {
     color: indigo;
 }
 
-#highscores:hover {
+#highscores-link:hover {
     font-weight: bold;
 }
 
@@ -41,29 +42,29 @@ button:hover {
     color: white;
 }
 
-/* Make the submit button smaller than the other buttons */
-#submit {
-    display: inline;
-    align-items: flex-start;
-    height: 30px;
-    width: 75px;
-    margin-top: 0;
-}
-
 row {
     display: block;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-/* Make final two buttons inline and smaller than the other buttons */
-.final-buttons {
+/* Make score page buttons inline and smaller than the other buttons */
+#score-page button {
     display: inline;
     align-items: flex-start;
     height: 30px;
     width: 200px;
     text-justify: center;
     margin-top: 20px;
+}
+
+/* Make the submit button smaller than the other buttons */
+#game-over-page button {
+    display: inline;
+    align-items: flex-start;
+    height: 30px;
+    width: 75px;
+    margin-top: 0;
 }
 
 /* Ensure entry section has the correct cursor */
@@ -73,7 +74,3 @@ input {
     align-items: flex-start;
     cursor: auto;
 };
-
-
-
-
